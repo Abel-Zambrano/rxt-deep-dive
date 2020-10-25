@@ -1,17 +1,22 @@
-import React, { useEffect } from 'react'; 
+import React, { useEffect, useRef } from 'react'; 
 
 import classes from './Cockpit.css';
 
 const cockpit = ( props ) => {
+  const toggleBtnRef = useRef(null); // Ref w/ React Hooks pt1
+
+  // Parsed after code runs 1st time
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
     // Http request...
-    const timer = setTimeout(() => {
-      alert('Saved data to the cloud!'); // When mounted
-    }, 1000);
+    // const timer = setTimeout(() => {
+    //   alert('Saved data to the cloud!'); // When mounted
+    // }, 1000);
     // When unmounted
+    toggleBtnRef.current.click(); // Ref w/ React Hooks pt2
+
     return () => {
-      clearTimeout(timer)
+      //clearTimeout(timer)
       console.log('[Cockpit.js] Cleanup work in useEffect'); 
     }   
   }, []); // Empty [] only executes once
@@ -41,8 +46,10 @@ const cockpit = ( props ) => {
           <h1>{props.title}</h1>
           <p className={assignedClasses.join( ' ' )}>This is really working!</p>
           <button
-              className={btnClass}
-              onClick={props.clicked}>Toggle Persons</button>
+            ref={toggleBtnRef} // Ref w/ React Hooks pt3
+            className={btnClass}
+            onClick={props.clicked}>Toggle Persons
+          </button>
       </div>
   );
 };
