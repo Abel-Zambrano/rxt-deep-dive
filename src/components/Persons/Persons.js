@@ -14,7 +14,8 @@ class Persons extends Component {
     if (
       nextProps.persons !== this.props.persons || 
       nextProps.changed !== this.props.changed || 
-      nextProps.clicked !== this.props.clicked    
+      nextProps.clicked !== this.props.clicked ||
+      nextProps.isAuthenticated !== this.props.isAuthenticated  
       ) {
       return true;
     } else {
@@ -48,6 +49,7 @@ class Persons extends Component {
           age={person.age}
           key={person.id}
           changed={event => this.props.changed(event, person.id)}
+          isAuth={this.props.isAuthenticated}
         />
       );
     });
